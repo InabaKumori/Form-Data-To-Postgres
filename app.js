@@ -31,7 +31,8 @@ app.post('/post/contact', upload.array(), async (req, res) => {
     console.log("Inserted and returned ID:", result.rows[0].id);
     res.json({ result: true, message: 'Form submitted successfully' });
   } catch (err) {
-    next(error); // Passes error to the error-handling middleware
+    console.error("Error inserting form data:", err.stack); // Log the error
+    res.status(500).json({ error: 'An error occurred. Please try again later.' });
   }
 });
 
